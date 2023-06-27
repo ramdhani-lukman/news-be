@@ -46,7 +46,8 @@ class NewsApi{
                 $article->author,
                 $article->publishedAt, 
                 $article->urlToImage,
-                $article->url
+                $article->url,
+                $article->source->name
             );
             $newsItems[] = $news;
         }

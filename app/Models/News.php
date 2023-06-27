@@ -17,7 +17,8 @@ class News extends Model
         'author',
         'date',
         'image',
-        'url'
+        'url',
+        'source'
     ];
     public function headlines(){
         /* News API Data */
@@ -25,14 +26,15 @@ class News extends Model
         return $headlines  = $newsAPI->headlines();
     }
 
-    public static function make($title,$description, $author, $date, $image, $url){
+    public static function make($title,$description, $author, $date, $image, $url, $source){
         return new News([
             'title' => $title,
             'description' => $description,
             'author' => $author,
             'date' => $date,
             'image' => $image,
-            'url'   => $url
+            'url'   => $url,
+            'source' => $source
         ]);
     }
 

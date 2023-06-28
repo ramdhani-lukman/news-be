@@ -32,6 +32,11 @@ class News extends Model
         return $headlines  = $newsAPI->headlines($query, $category, $authors, $page);
     }
 
+    public function search(Request $request){
+        $newsAPI    = new NewsApi;
+        return $newsAPI->search($request->q,$request->sources,$request->from,$request->to,$request->page);
+    }
+
     public static function make($title,$description, $author, $date, $image, $url, $source){
         return new News([
             'title' => $title,

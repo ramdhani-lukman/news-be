@@ -22,12 +22,15 @@ class NewsApi{
         $object = $request->object();
     }
 
-    public function headlines(){
+    public function headlines($query = null, $category = null, $authors = null, $page = 1){
         try {
             $request   = Http::get(self::URL_TOP_HEADLINES,[
                 'apiKey' => env('NEWS_API_KEY'),
                 'country' => 'us',
-                'pageSize' => 10
+                'pageSize' => 10,
+                'page' => $page,
+                'q' => $query,
+                'category' => $category
             ]);
         } catch (\Throwable $th) {
             return HttpResponses::error("Failed fetching headlines");

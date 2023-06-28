@@ -8,6 +8,6 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register',[AuthController::class,'register']);
 Route::post('/login',[AuthController::class,'login']);
 
-Route::get('/news/list',[NewsController::class,'list']);
 Route::get('/news/headlines',[NewsController::class,'headlines']);
+
 

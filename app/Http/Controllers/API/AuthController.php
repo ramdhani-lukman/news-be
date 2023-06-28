@@ -25,9 +25,11 @@ class AuthController extends Controller{
     }
 
     public function login(LoginRequest $request){
-        if(!Auth::attempt($request->only(['email','password']))){
+        
+        if (!Auth::guard('web')->attempt($request->only(['email', 'password']))) {
             return HttpResponses::error("Unauthorized");
         }
+        
         $user   = Auth::user();
         $token  = $user->createToken("API_TOKEN_".$user->email)->plainTextToken;
         return HttpResponses::success([

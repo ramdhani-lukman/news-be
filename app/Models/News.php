@@ -6,6 +6,7 @@ use App\DataSource\Factory;
 use App\DataSource\NewsApi;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class News extends Model
@@ -20,10 +21,15 @@ class News extends Model
         'url',
         'source'
     ];
-    public function headlines(){
+    public function headlines(Request $request){
         /* News API Data */
         $newsAPI    = new NewsApi;
-        return $headlines  = $newsAPI->headlines();
+        $query      = $request->has('q') ? $request->q : null;
+        $category      = $request->has('category') ? $request->category : null;
+        $authors      = $request->has('authors') ? $request->authors : null;
+        $page      = $request->has('page') ? intval($request->page) : 1;
+
+        return $headlines  = $newsAPI->headlines($query, $category, $authors, $page);
     }
 
     public static function make($title,$description, $author, $date, $image, $url, $source){

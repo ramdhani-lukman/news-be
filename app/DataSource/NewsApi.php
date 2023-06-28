@@ -64,8 +64,10 @@ class NewsApi{
         }
 
         if($request->failed()){
-            return false;
+            $response = json_decode($request->body());
+            return HttpResponses::error($response->message);
         }
+
         $requestBody = json_decode($request->body());
         $articles   = $requestBody->articles;
         $newsItems  = [];
